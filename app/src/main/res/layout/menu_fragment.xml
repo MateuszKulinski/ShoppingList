@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_cell"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/menu_fragment_new_list"
+        style="@style/MyButtonStyle"
+        android:text="@string/new_list" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/menu_fragment_my_list"
+        style="@style/MyButtonStyle"
+        android:text="@string/my_list" />
+
+
+</LinearLayout>

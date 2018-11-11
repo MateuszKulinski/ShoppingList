@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ShoppingList</string>
+    <string name="new_list">Nowa Lista</string>
+    <string name="my_list">Moje Listy</string>
+    <string name="example">Lorem Ipsum</string>
+    <string name="list_name">Nazwa Listy</string>
+    <string name="product">Produkt</string>
+    <string name="price">Cena (opcjonalne)</string>
+    <string name="add">Dodaj</string>
+    <string name="save">Zapisz</string>
+</resources>

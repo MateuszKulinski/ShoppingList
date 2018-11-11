@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_cell">
+
+    <android.support.design.widget.TextInputLayout style="@style/MyTextInputStyle">
+
+        <EditText
+            android:id="@+id/new_list_list_name"
+            style="@style/MyTextInputStyle.MyEditTextStyle"
+            android:hint="@string/list_name"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout style="@style/MyTextInputStyle">
+
+        <EditText
+            android:id="@+id/new_list_product_name"
+            style="@style/MyTextInputStyle.MyEditTextStyle"
+            android:hint="@string/product"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout style="@style/MyTextInputStyle">
+
+        <EditText
+            android:id="@+id/new_list_product_price"
+            style="@style/MyTextInputStyle.MyEditTextStyle"
+            android:hint="@string/price"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/new_list_add_product"
+        style="@style/MyButtonStyle.MyButtonStyleSmall"
+        android:text="@string/add" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/new_list_save"
+        style="@style/MyButtonStyle"
+        android:text="@string/save" />
+
+</LinearLayout>

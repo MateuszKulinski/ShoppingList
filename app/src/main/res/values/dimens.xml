@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Padding-->
+    <dimen name="padding_cell">10dp</dimen>
+
+    <!--TextSize-->
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+
+    <!--Button-->
+    <dimen name="button_margin_horizontal">20dp</dimen>
+    <dimen name="button_background_radius">10dp</dimen>
+    <dimen name="button_margin_vertical">10dp</dimen>
+    <dimen name="button_margin_vertical_small">1dp</dimen>
+    <dimen name="button_height_small">30dp</dimen>
+</resources>
