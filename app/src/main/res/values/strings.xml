@@ -15,5 +15,8 @@
     <string name="quantity">Ilość</string>
     <string name="quantity_opt">Ilość (opcjonalnie)</string>
     <string name="send">Wyślij</string>
-    <string name="delete">Usunięto</string>
+    <string name="deleted">Usunięto</string>
+    <string name="delete">Usuń</string>
+    <string name="bought">Kupiono</string>
+    <string name="empty">Brak List</string>
 </resources>

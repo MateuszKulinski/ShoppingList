@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.komputer.shoppinglist.R;
@@ -52,6 +53,15 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
                 }
             }
         });
+
+        holder.trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (interactions.get() != null) {
+                    interactions.get().onDelete(item.getListID());
+                }
+            }
+        });
     }
 
     @Override
@@ -61,17 +71,21 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
 
     public interface MyListInterface {
         void onClick(int listID);
+
+        void onDelete(int listID);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View root;
         TextView name, price;
+        ImageView trash;
 
         public ViewHolder(View itemView) {
             super(itemView);
             root = itemView;
             name = itemView.findViewById(R.id.my_lists_item_name);
             price = itemView.findViewById(R.id.my_lists_item_price);
+            trash = itemView.findViewById(R.id.my_lists_item_trash);
         }
     }
 }

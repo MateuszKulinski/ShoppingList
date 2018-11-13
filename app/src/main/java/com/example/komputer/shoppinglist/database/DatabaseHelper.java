@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,10 +103,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             float price = cursor.getFloat(4);
             totalPrice -= price;
         }
+        cursor.close();
         database = this.getWritableDatabase();
         sql = "DELETE FROM " + product;
         database.execSQL(sql);
+        database.close();
         return true;
+    }
+
+    public void deleteList(long listID) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String sql = "DELETE FROM " + DatabaseNames.LIST_PROD + " WHERE " + DatabaseNames.ID_LIST + " = '" + listID + "'";
+        database.execSQL(sql);
+        sql = "DELETE FROM " + DatabaseNames.LIST_SHOP + " WHERE " + DatabaseNames.ID_LIST + " = '" + listID + "'";
+        database.execSQL(sql);
+        database.close();
     }
 
     public List<ProductItem> getListProducts(Long shopID) {
@@ -141,7 +153,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             item.setListPrice(cursor.getFloat(2));
             list.add(item);
         }
+        cursor.close();
+        database.close();
         return list;
     }
-
 }

@@ -120,6 +120,7 @@ public class NewList extends BaseFragment implements TextWatcher, NewListAdapter
 
     private void saveList() {
         databaseHelper.getTotalPrice();
+        Toast.makeText(getContext(), getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
         getNavigationInterface().changeFragment(Menu.newInstance());
     }
 
@@ -232,7 +233,7 @@ public class NewList extends BaseFragment implements TextWatcher, NewListAdapter
     public void deleteProduct(int productID) {
         databaseHelper.deleteProduct(productID);
         adapter.notifyDataSetChanged();
-        Toast.makeText(getContext(), getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.deleted), Toast.LENGTH_SHORT).show();
         getAdapter();
         if (list.isEmpty()) {
             setBtnColor(saveBtn, false);

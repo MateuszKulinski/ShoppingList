@@ -8,12 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.komputer.shoppinglist.R;
 import com.example.komputer.shoppinglist.base.BaseFragment;
 import com.example.komputer.shoppinglist.database.DatabaseHelper;
 import com.example.komputer.shoppinglist.database.ListItem;
-import com.example.komputer.shoppinglist.pages.detailsList.DetailsList;
+import com.example.komputer.shoppinglist.pages.mylists.detailsList.DetailsList;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterf
     private DatabaseHelper databaseHelper;
     private RecyclerView recyclerView;
     private MyListsAdapter adapter;
+    private TextView empty;
     private List<ListItem> list;
 
     public static MyLists newInstance() {
@@ -50,10 +53,18 @@ public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterf
         recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        if (list.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+        }
     }
 
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.my_lists_recycler);
+        empty = view.findViewById(R.id.my_lists_empty);
     }
 
     @Override
@@ -63,5 +74,12 @@ public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterf
         args.putInt(KEY_ID, listID);
         detailsList.setArguments(args);
         getNavigationInterface().changeFragment(detailsList);
+    }
+
+    @Override
+    public void onDelete(int listID) {
+        databaseHelper.deleteList(listID);
+        Toast.makeText(getContext(), getResources().getString(R.string.deleted), Toast.LENGTH_SHORT).show();
+        setAdapter();
     }
 }
