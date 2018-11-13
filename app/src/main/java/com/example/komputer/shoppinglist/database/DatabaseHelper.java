@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
     }
 
-    public float getTotalPrice() {
-        saveTotalPrice();
+    public float getTotalPrice(long shopID) {
+        saveTotalPrice(shopID);
         return totalPrice;
     }
 
@@ -38,11 +37,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void saveTotalPrice() {
+    private void saveTotalPrice(long shopID) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseNames.PRICE_LIST, totalPrice);
-        database.update(DatabaseNames.LIST_SHOP, values, null, null);
+        String whereClause = DatabaseNames.ID_LIST + " = '" + shopID + "'";
+        database.update(DatabaseNames.LIST_SHOP, values, whereClause, null);
         database.close();
     }
 
@@ -156,5 +156,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         database.close();
         return list;
+    }
+
+
+    public String getNamePriceFromDatabase(long listID) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        float totalPrice = 0;
+        String ret = "";
+        String sql = "SELECT * FROM " + DatabaseNames.LIST_SHOP + " WHERE " + DatabaseNames.ID_LIST + " = '" + listID + "'";
+        Cursor cursor = database.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            ret = cursor.getString(1);
+            totalPrice = cursor.getFloat(2);
+        }
+        cursor.close();
+        database.close();
+        ret += " " + totalPrice + "\n";
+        return ret;
     }
 }

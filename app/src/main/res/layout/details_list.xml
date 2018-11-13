@@ -8,7 +8,15 @@
         android:id="@+id/details_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/details_list_delete" />
+        android:layout_above="@+id/details_list_send" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/details_list_send"
+        style="@style/MyButtonStyle"
+        android:layout_above="@+id/details_list_delete"
+        android:layout_centerHorizontal="true"
+        android:enabled="true"
+        android:text="@string/send" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/details_list_delete"

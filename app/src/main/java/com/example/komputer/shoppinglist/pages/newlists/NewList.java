@@ -107,7 +107,7 @@ public class NewList extends BaseFragment implements TextWatcher, NewListAdapter
     }
 
     private void sendText() {
-        String text = listNameTV.getText() + " " + databaseHelper.getTotalPrice() + "\n";
+        String text = listNameTV.getText() + " " + databaseHelper.getTotalPrice(shopID) + "\n";
         for (ProductItem item : list) {
             text += item.getProductName() + ", " + getResources().getText(R.string.quantity) + ": " + item.getProductQuantity() + ", " + getResources().getText(R.string.price) + ": " + (item.getProductPrice() < 0.1 ? 0 : item.getProductPrice()) + "\n";
         }
@@ -119,7 +119,7 @@ public class NewList extends BaseFragment implements TextWatcher, NewListAdapter
     }
 
     private void saveList() {
-        databaseHelper.getTotalPrice();
+        databaseHelper.getTotalPrice(shopID);
         Toast.makeText(getContext(), getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
         getNavigationInterface().changeFragment(Menu.newInstance());
     }

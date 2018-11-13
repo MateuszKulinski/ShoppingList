@@ -21,6 +21,7 @@ import java.util.List;
 
 public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterface {
     public static String KEY_ID = "id_key";
+    public static String KEY_NAME = "id_name";
     private DatabaseHelper databaseHelper;
     private RecyclerView recyclerView;
     private MyListsAdapter adapter;

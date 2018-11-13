@@ -1,5 +1,6 @@
 package com.example.komputer.shoppinglist.pages.mylists.detailsList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
     private RecyclerView recyclerView;
     private NewListAdapter adapter;
     private List<ProductItem> list = new ArrayList<>();
-    private Button deleteBtn;
+    private Button deleteBtn, sendBtn;
 
     public static DetailsList newInstance() {
         return new DetailsList();
@@ -62,6 +63,24 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
                 deleteList();
             }
         });
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendText();
+            }
+        });
+    }
+
+    private void sendText() {
+        String text = databaseHelper.getNamePriceFromDatabase(listID);
+        for (ProductItem item : list) {
+            text += item.getProductName() + ", " + getResources().getText(R.string.quantity) + ": " + item.getProductQuantity() + ", " + getResources().getText(R.string.price) + ": " + (item.getProductPrice() < 0.1 ? 0 : item.getProductPrice()) + (item.getBought()==1 ? "Kupione": "")+"\n";
+        }
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     private void deleteList() {
@@ -81,6 +100,7 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.details_list_recycler_view);
         deleteBtn = view.findViewById(R.id.details_list_delete);
+        sendBtn= view.findViewById(R.id.details_list_send);
     }
 
     @Override
