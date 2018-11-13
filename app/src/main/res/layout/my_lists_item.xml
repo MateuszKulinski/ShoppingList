@@ -13,15 +13,15 @@
         style="@style/MyListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/example"
-        android:textColor="@color/primary_text" />
+        android:text="@string/example" />
 
     <TextView
         android:id="@+id/my_lists_item_price"
         style="@style/MyListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/example" />
+        android:text="@string/example"
+        android:textSize="@dimen/text_size_title_small" />
 
 
 </LinearLayout>

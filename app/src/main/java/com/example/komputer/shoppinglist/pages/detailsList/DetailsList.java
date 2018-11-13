@@ -1,4 +1,4 @@
-package com.example.komputer.shoppinglist.pages.mylists;
+package com.example.komputer.shoppinglist.pages.detailsList;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,26 +12,33 @@ import android.view.ViewGroup;
 import com.example.komputer.shoppinglist.R;
 import com.example.komputer.shoppinglist.base.BaseFragment;
 import com.example.komputer.shoppinglist.database.DatabaseHelper;
-import com.example.komputer.shoppinglist.database.ListItem;
-import com.example.komputer.shoppinglist.pages.detailsList.DetailsList;
+import com.example.komputer.shoppinglist.database.ProductItem;
+import com.example.komputer.shoppinglist.pages.mylists.MyLists;
+import com.example.komputer.shoppinglist.pages.newlists.NewListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterface {
-    public static String KEY_ID = "id_key";
+public class DetailsList extends BaseFragment implements NewListAdapter.DetailsListInterface {
     private DatabaseHelper databaseHelper;
+    private long listID;
     private RecyclerView recyclerView;
-    private MyListsAdapter adapter;
-    private List<ListItem> list;
+    private NewListAdapter adapter;
+    private List<ProductItem> list = new ArrayList<>();
 
-    public static MyLists newInstance() {
-        return new MyLists();
+    public static DetailsList newInstance() {
+        return new DetailsList();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.my_lists, container, false);
+        View view = inflater.inflate(R.layout.details_list, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            listID = bundle.getInt(MyLists.KEY_ID);
+        }
 
         databaseHelper = new DatabaseHelper(getContext());
         findViews(view);
@@ -45,23 +52,19 @@ public class MyLists extends BaseFragment implements MyListsAdapter.MyListInterf
     }
 
     private void setAdapter() {
-        list = databaseHelper.getListShops();
-        adapter = new MyListsAdapter(list, this);
+        list = databaseHelper.getListProducts(listID);
+        adapter = new NewListAdapter(list, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     private void findViews(View view) {
-        recyclerView = view.findViewById(R.id.my_lists_recycler);
+        recyclerView = view.findViewById(R.id.details_list_recycler_view);
     }
 
     @Override
-    public void onClick(int listID) {
-        DetailsList detailsList = DetailsList.newInstance();
-        Bundle args = new Bundle();
-        args.putInt(KEY_ID, listID);
-        detailsList.setArguments(args);
-        getNavigationInterface().changeFragment(detailsList);
+    public void bought(int productID, int bought) {
+        databaseHelper.setBought(productID, bought);
     }
 }

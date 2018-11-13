@@ -15,8 +15,15 @@
         <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:background">@drawable/button_background_unf</item>
         <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:enabled">false</item>
+    </style>
+
+    <style name="MyButtonStyle.Menu">
+        <item name="android:enabled">true</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:background">@drawable/button_background</item>
     </style>
 
     <style name="MyButtonStyle.MyButtonStyleSmall">
@@ -27,8 +34,21 @@
         <item name="android:layout_marginTop">@dimen/button_margin_vertical_small</item>
     </style>
 
+    <style name="MyButtonStyle.MyButtonStyleBig">
+        <item name="android:textSize">@dimen/text_size_big</item>
+        <item name="android:layout_height">@dimen/button_height_big</item>
+        <item name="android:layout_marginLeft">@dimen/button_margin_horizontal_big</item>
+        <item name="android:layout_marginRight">@dimen/button_margin_horizontal_big</item>
+        <item name="android:layout_marginTop">@dimen/button_margin_vertical_small</item>
+    </style>
+
     <style name="MyListTitle">
         <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="MyListTitle.Small">
+        <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">@color/secondary_text</item>
     </style>
 
@@ -41,8 +61,12 @@
     <style name="MyTextInputStyle.MyEditTextStyle">
         <item name="android:backgroundTint">@color/accent</item>
         <item name="android:textColor">@color/primary_text</item>
-        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColorHint">@color/primary_text</item>
     </style>
 
-    <dimen name="button_margin_horizontal_big">50dp</dimen>
+    <style name="MyTextInputStyle.MyEditTextStyle.Big">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+
 </resources>

@@ -5,7 +5,15 @@
     <string name="example">Lorem Ipsum</string>
     <string name="list_name">Nazwa Listy</string>
     <string name="product">Produkt</string>
-    <string name="price">Cena (opcjonalne)</string>
+    <string name="price_opt">Cena (opcjonalne)</string>
+    <string name="price">Cena</string>
     <string name="add">Dodaj</string>
     <string name="save">Zapisz</string>
+    <string name="saved">Zapisano</string>
+    <string name="failed">Błąd</string>
+    <string name="next">Dalej</string>
+    <string name="quantity">Ilość</string>
+    <string name="quantity_opt">Ilość (opcjonalnie)</string>
+    <string name="send">Wyślij</string>
+    <string name="delete">Usunięto</string>
 </resources>

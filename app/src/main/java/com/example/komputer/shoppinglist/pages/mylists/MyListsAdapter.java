@@ -8,8 +8,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.komputer.shoppinglist.R;
+import com.example.komputer.shoppinglist.database.ListItem;
 
-public class MyListsItem extends RecyclerView.Adapter<MyListsItem.ViewHolder> {
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHolder> {
+    private List<ListItem> list;
+    private WeakReference<MyListInterface> interactions;
+
+    public MyListsAdapter(List<ListItem> list, MyListInterface interactions) {
+        this.interactions = new WeakReference<>(interactions);
+        if (list != null) {
+            this.list = list;
+        } else {
+            list = new ArrayList<>();
+        }
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -21,19 +38,29 @@ public class MyListsItem extends RecyclerView.Adapter<MyListsItem.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final ListItem item = list.get(position);
 
+        holder.name.setText(item.getListName());
+        String helper = holder.itemView.getResources().getString(R.string.price) + ": ";
+        holder.price.setText(helper + item.getListPrice());
 
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (interactions.get() != null) {
+                    interactions.get().onClick(item.getListID());
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
+    }
+
+    public interface MyListInterface {
+        void onClick(int listID);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

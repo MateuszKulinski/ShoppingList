@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_cell"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/padding_cell">
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/menu_fragment_new_list"
-        style="@style/MyButtonStyle"
+        style="@style/MyButtonStyle.Menu"
         android:text="@string/new_list" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/menu_fragment_my_list"
-        style="@style/MyButtonStyle"
+        style="@style/MyButtonStyle.Menu"
         android:text="@string/my_list" />
 
 
