@@ -1,4 +1,4 @@
-package com.example.komputer.shoppinglist.pages.mylists.detailsList;
+package com.example.komputer.shoppinglist.pages.detailsList;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.komputer.shoppinglist.R;
@@ -27,6 +28,7 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
     private long listID;
     private RecyclerView recyclerView;
     private NewListAdapter adapter;
+    private TextView empty;
     private List<ProductItem> list = new ArrayList<>();
     private Button deleteBtn, sendBtn;
 
@@ -74,7 +76,7 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
     private void sendText() {
         String text = databaseHelper.getNamePriceFromDatabase(listID);
         for (ProductItem item : list) {
-            text += item.getProductName() + ", " + getResources().getText(R.string.quantity) + ": " + item.getProductQuantity() + ", " + getResources().getText(R.string.price) + ": " + (item.getProductPrice() < 0.1 ? 0 : item.getProductPrice()) + (item.getBought()==1 ? "Kupione": "")+"\n";
+            text += item.getProductName() + ", " + getResources().getText(R.string.quantity) + ": " + item.getProductQuantity() + ", " + getResources().getText(R.string.price) + ": " + (item.getProductPrice() < 0.1 ? 0 : item.getProductPrice()) + (item.getBought() == 1 ? "Kupione" : "") + "\n";
         }
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -95,12 +97,20 @@ public class DetailsList extends BaseFragment implements NewListAdapter.DetailsL
         recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        if (list.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+        }
     }
 
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.details_list_recycler_view);
         deleteBtn = view.findViewById(R.id.details_list_delete);
-        sendBtn= view.findViewById(R.id.details_list_send);
+        sendBtn = view.findViewById(R.id.details_list_send);
+        empty = view.findViewById(R.id.details_list_empty);
     }
 
     @Override
